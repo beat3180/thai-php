@@ -17,7 +17,16 @@ window.axios.interceptors.request.use(config => {
     config.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN')
 
     return config
-  })
+})
+
+/*axios の response インターセプターはレスポンスを受けた後の処理を上書きします。
+第一引数が成功時の処理ですが、こちらは変更しないのでそのまま response を返しています。
+第二引数は失敗時の処理で、こちらを変更しています。  */
+//エラー処理をここでまとめている
+window.axios.interceptors.response.use(
+  response => response,
+  error => error.response || error
+)
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
