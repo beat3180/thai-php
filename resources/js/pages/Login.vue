@@ -89,11 +89,11 @@ export default {
       return this.$store.state.auth.loginErrorMessages
     },
     registerErrors () {
-      return this.$store.state.state.auth.registerErrorMessages
+      return this.$store.state.auth.registerErrorMessages
     },
-    clearError () {
+    /*clearError () {
       this.$store.commit('auth/setLoginErrorMessages', null)
-    },
+    },*/
   },
   methods: {
     login () {

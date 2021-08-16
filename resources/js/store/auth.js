@@ -72,8 +72,8 @@ const actions = {
     context.commit('setApiStatus', null)
     const response = await axios.post('/api/login', data)
       //login が失敗すると responseには errが代入。成功するとerr.response
-      .catch(err => err.response || err)
-      console.log(response.data.errors)
+      //bootstrap.jsにまとめたのでコメントアウト
+      //.catch(err => err.response || err)
 
     //api呼び出しに成功すると内側へ
     if (response.status === OK) {
@@ -118,7 +118,8 @@ const actions = {
     const response = await axios.get('/api/user')
     //axiosでresponse.dataが空文字の場合、nullを取得。||は真偽値チェックjavascript
     const user = response.data || null
-    context.commit('setUser', user)
+
+    //context.commit('setUser', user)
     if (response.status === OK) {
       context.commit('setApiStatus', true)
       context.commit('setUser', user)

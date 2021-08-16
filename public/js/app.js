@@ -2203,11 +2203,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.$store.state.auth.loginErrorMessages;
     },
     registerErrors: function registerErrors() {
-      return this.$store.state.state.auth.registerErrorMessages;
-    },
-    clearError: function clearError() {
-      this.$store.commit('auth/setLoginErrorMessages', null);
+      return this.$store.state.auth.registerErrorMessages;
     }
+    /*clearError () {
+      this.$store.commit('auth/setLoginErrorMessages', null)
+    },*/
+
   },
   methods: (_methods = {
     login: function login() {
@@ -38603,17 +38604,13 @@ var actions = {
               //api呼び出しをコミット、statusを取得しnullに
               context.commit('setApiStatus', null);
               _context2.next = 3;
-              return axios.post('/api/login', data) //login が失敗すると responseには errが代入。成功するとerr.response
-              ["catch"](function (err) {
-                return err.response || err;
-              });
+              return axios.post('/api/login', data);
 
             case 3:
               response = _context2.sent;
-              console.log(response.data.errors); //api呼び出しに成功すると内側へ
 
               if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                _context2.next = 9;
+                _context2.next = 8;
                 break;
               }
 
@@ -38623,7 +38620,7 @@ var actions = {
               context.commit('setUser', response.data);
               return _context2.abrupt("return", false);
 
-            case 9:
+            case 8:
               //apistatusをfalseに更新。失敗
               context.commit('setApiStatus', false);
 
@@ -38639,7 +38636,7 @@ var actions = {
                 });
               }
 
-            case 11:
+            case 10:
             case "end":
               return _context2.stop();
           }
@@ -38701,11 +38698,10 @@ var actions = {
             case 3:
               response = _context4.sent;
               //axiosでresponse.dataが空文字の場合、nullを取得。||は真偽値チェックjavascript
-              user = response.data || null;
-              context.commit('setUser', user);
+              user = response.data || null; //context.commit('setUser', user)
 
               if (!(response.status === _util__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                _context4.next = 10;
+                _context4.next = 9;
                 break;
               }
 
@@ -38713,13 +38709,13 @@ var actions = {
               context.commit('setUser', user);
               return _context4.abrupt("return", false);
 
-            case 10:
+            case 9:
               context.commit('setApiStatus', false);
               context.commit('error/setCode', response.status, {
                 root: true
               });
 
-            case 12:
+            case 11:
             case "end":
               return _context4.stop();
           }
