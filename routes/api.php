@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+
+// 写真投稿
+Route::post('/photos', 'PhotoController@create')->name('photo.create');
 // ログインユーザー
 Route::get('/user', fn() => Auth::user())->name('user');
 // ログアウト
